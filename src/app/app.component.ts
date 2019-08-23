@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'meuip-root',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MeuIP';
+  ipAddress:any;
+  
+  constructor(private http: HttpClient){
+    this.http.get<{ip:string}>('https://jsonip.com')
+    .subscribe( data => {
+      console.log('th data', data);
+      this.ipAddress = data
+    })
+  }
+
+
+
+
 }
